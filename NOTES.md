@@ -1,5 +1,6 @@
-//TODO
-- retrieve dockeruser name / password from env variables ✅
--  set docker username/password in GIT ✅
--  Make a snyk project?
--  Add Dockerfile to the cookie cutter ⚡
+# IsKingInCheckUI
+
+- ✅ Add contract submodule
+- ✅ Create scaffolding for the E2E test
+- Mock axios
+- Implement startGame
