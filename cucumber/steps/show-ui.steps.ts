@@ -7,11 +7,11 @@ import { isKingInCheckStub } from "../../test/stub/stub";
 
 const feature = loadFeature("./cucumber/features/show-ui.feature");
 
-const consoleSpy = jest.spyOn(global.console, "log");
+const consoleSpy = jest.spyOn(console, "log").mockImplementation();
 const axiosMock = new MockAdapter(axios);
 
-defineFeature(feature, (test) => {
-  test("Displaying the initial chessboard with fixed piece positions", ({
+defineFeature(feature, async (test) => {
+  test("Displaying the initial chessboard with fixed piece positions", async ({
     given,
     when,
     then,

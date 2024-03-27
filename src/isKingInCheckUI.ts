@@ -47,5 +47,3 @@ export async function startGame() {
 
   console.log("Status: King is not in check.");
 }
-
-startGame();
