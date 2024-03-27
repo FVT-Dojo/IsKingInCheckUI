@@ -1,4 +1,4 @@
-Feature: Cookiecutter
+Feature: Show UI
 
 Scenario: Displaying the initial chessboard with fixed piece positions
 

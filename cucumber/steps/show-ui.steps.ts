@@ -1,8 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { loadFeature, defineFeature } from "jest-cucumber";
+import axios from "axios";
+import MockAdapter from "axios-mock-adapter";
 import { startGame } from "../../src/isKingInCheckUI";
-import axios from 'axios';
-import MockAdapter from 'axios-mock-adapter';
 import { isKingInCheckStub } from "../../test/stub/stub";
 
 const feature = loadFeature("./cucumber/features/show-ui.feature");
@@ -20,12 +20,14 @@ defineFeature(feature, (test) => {
     given(
       "the backend responds with a chessboard with a rook on A5 and the king on E1",
       () => {
-        axiosMock.onGet("/path/to/your/endpoint").reply(200, isKingInCheckStub);
+        axiosMock
+          .onGet("http://localhost:5000/mcoen93ns/IsKingInCheck/1.0.0/game")
+          .reply(200, isKingInCheckStub);
       }
     );
 
-    when("the user starts the game from the console", () => {
-      startGame();
+    when("the user starts the game from the console", async () => {
+      await startGame();
     });
 
     then(/^the user sees a message "(.*)"$/, (message) => {

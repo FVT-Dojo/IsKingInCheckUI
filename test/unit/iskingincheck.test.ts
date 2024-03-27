@@ -1,7 +1,16 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-import { getIsKingInCheckStatus } from "../../src/isKingInCheckUI";
-import { chessboardStub, isKingInCheckStub } from "../stub/stub";
+import {
+  convertToChessCoordinates,
+  getIsKingInCheckStatus,
+  getPiecePosition,
+} from "../../src/isKingInCheckUI";
+import {
+  emptyChessboardStub,
+  chessboardStubKingE1,
+  isKingInCheckStub,
+  chessboardStubKingA8,
+} from "../stub/stub";
 
 const axiosMock = new MockAdapter(axios);
 
@@ -25,11 +34,53 @@ describe("This is the unit test suite for our IsKingInCheck functionality. Here 
       );
     });
     describe("When a response has been received, determine the position of the chesspieces", () => {
-      it("Determine the position of the king", () => {
-        // assert that the king is on position E1
-        const chessboard = chessboardStub;
-        const output = [4][7];
-        expect(getKingPosition(chessboard)).toEqual(output);
+      describe("Determine the position of a piece in coordinates", () => {
+        describe("when the king is on position", () => {
+          it("E1", () => {
+            const chessboard = chessboardStubKingE1;
+            const output = [4, 7];
+            expect(getPiecePosition(chessboard, "K")).toEqual(output);
+          });
+          it("A8", () => {
+            const chessboard = chessboardStubKingA8;
+            const output = [0, 0];
+            expect(getPiecePosition(chessboard, "K")).toEqual(output);
+          });
+          it("No king", () => {
+            const chessboard = emptyChessboardStub;
+            const output = undefined;
+            expect(getPiecePosition(chessboard, "K")).toEqual(output);
+          });
+        });
+        describe("when the rook is on position", () => {
+          it("A5", () => {
+            const chessboard = chessboardStubKingE1;
+            const output = [0, 3];
+            expect(getPiecePosition(chessboard, "R")).toEqual(output);
+          });
+          it("H7", () => {
+            const chessboard = chessboardStubKingA8;
+            const output = [7, 1];
+            expect(getPiecePosition(chessboard, "R")).toEqual(output);
+          });
+          it("No rook", () => {
+            const chessboard = emptyChessboardStub;
+            const output = undefined;
+            expect(getPiecePosition(chessboard, "R")).toEqual(output);
+          });
+        });
+      });
+      describe("Now we need to convert these coordinates to chess coordinates", () => {
+        it("(4,7) => E1", () => {
+          const input = [4, 7] as [number, number];
+          const output = "E1";
+          expect(convertToChessCoordinates(input)).toEqual(output);
+        });
+        it("(0,0) => A8", () => {
+          const input = [0, 0] as [number, number];
+          const output = "A8";
+          expect(convertToChessCoordinates(input)).toEqual(output);
+        });
       });
     });
   });
