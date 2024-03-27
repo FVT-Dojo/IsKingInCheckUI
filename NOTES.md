@@ -7,5 +7,5 @@
 - ✅ Unit: GET call to mock/backend
 -- ✅ implement successfull call
 -- ✅ implement unsuccessfull call
-Response: process to the three outputs we want to show to the user
+Response (unit): process to the three outputs we want to show to the user
 Show the user the output of the 'game' 
