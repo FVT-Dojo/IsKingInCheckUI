@@ -1,0 +1,3 @@
+[submodule "IskingInCheckContract"]
+	path = IskingInCheckContract
+	url = https://github.com/FVT-Dojo/IskingInCheckContract.git
