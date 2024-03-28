@@ -21,7 +21,7 @@ defineFeature(feature, async (test) => {
       "the backend responds with a chessboard with a rook on A5 and the king on E1",
       () => {
         axiosMock
-          .onGet("http://localhost:5000/mcoen93ns/IsKingInCheck/1.0.0/game")
+          .onGet("http://localhost:5000/game")
           .reply(200, isKingInCheckStub);
       }
     );

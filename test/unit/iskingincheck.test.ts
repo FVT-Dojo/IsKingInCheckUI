@@ -18,7 +18,7 @@ describe("This is the unit test suite for our IsKingInCheck functionality. Here 
   describe("The first step is to perform a GET call to our good friend, the back-end", () => {
     it("When the backend responds successfully, this should be handled.", async () => {
       axiosMock
-        .onGet("http://localhost:5000/mcoen93ns/IsKingInCheck/1.0.0/game")
+        .onGet("http://localhost:5000/game")
         .reply(200, isKingInCheckStub);
       const response = await getIsKingInCheckStatus();
 
@@ -26,7 +26,7 @@ describe("This is the unit test suite for our IsKingInCheck functionality. Here 
     });
     it("An error should also be handled.", async () => {
       axiosMock
-        .onGet("http://localhost:5000/mcoen93ns/IsKingInCheck/1.0.0/game")
+        .onGet("http://localhost:5000/game")
         .reply(500);
 
       await expect(getIsKingInCheckStatus()).rejects.toThrow(

@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.startGame = exports.convertToChessCoordinates = exports.getPiecePosition = exports.getIsKingInCheckStatus = void 0;
 const axios_1 = __importDefault(require("axios"));
 async function getIsKingInCheckStatus() {
-    const response = await axios_1.default.get("http://localhost:5000/mcoen93ns/IsKingInCheck/1.0.0/game");
+    const response = await axios_1.default.get("http://localhost:5000/game");
     return response.data;
 }
 exports.getIsKingInCheckStatus = getIsKingInCheckStatus;
@@ -29,12 +29,12 @@ function convertToChessCoordinates([column, row]) {
 exports.convertToChessCoordinates = convertToChessCoordinates;
 async function startGame() {
     const response = await getIsKingInCheckStatus();
-    const kingPosition = getPiecePosition(response.chessboard, "K");
+    const kingPosition = getPiecePosition(response.chessboardStatus.chessboard, "K");
     if (kingPosition !== undefined) {
         const kingChessPosition = convertToChessCoordinates(kingPosition);
         console.log(`The king is on ${kingChessPosition}.`);
     }
-    const rookPosition = getPiecePosition(response.chessboard, "R");
+    const rookPosition = getPiecePosition(response.chessboardStatus.chessboard, "R");
     if (rookPosition !== undefined) {
         const rookChessPosition = convertToChessCoordinates(rookPosition);
         console.log(`A rook is on ${rookChessPosition}.`);
